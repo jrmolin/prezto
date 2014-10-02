@@ -12,3 +12,18 @@ fi
 
 # Customize to your needs...
 
+# mount the case-sensitive file system $1 at $2
+function mountCaseSensitive {
+    if test "x$1" = "x" || test "x$2" = "x"; then
+        echo "mountCaseSensitive <filesystem file> <location (/Volumes/somewhere)>"
+    else
+        hdiutil attach $1 -mountpoint $2;
+    fi
+}
+
+#export PYTHONPATH="$PYTHONPATH:/usr/local/Cellar/pyside-tools/0.2.15/lib/python2.7/site-packages/pysideuic:/usr/local/Cellar/pyside/1.2.2/lib/python2.7/site-packages"
+PATH="$PATH:~/bin"
+export VAGRANT_VMWARE_CLONE_DIRECTORY="$HOME/Documents/Virtual Machines.localized/"
+if [ ! -d $VAGRANT_VMWARE_CLONE_DIRECTORY ] ; then
+    mkdir -pv $VAGRANT_VMWARE_CLONE_DIRECTORY
+fi
