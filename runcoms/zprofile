@@ -76,11 +76,13 @@ if [[ ! -d "$TMPPREFIX" ]]; then
 fi
 
 
-# update maxfilesperproc
-NUMFILES=$(sysctl kern.maxfilesperproc | awk '{ print $NF; }')
-if [[ "${NUMFILES}" < 8192 ]] ; then
+# update maxfilesperproc on Darwin
+if [[ "$(uname)" == "Darwin" ]] ; then
+  NUMFILES=$(sysctl kern.maxfilesperproc | awk '{ print $NF; }')
+  if [[ "${NUMFILES}" < 8192 ]] ; then
     echo "setting kern.maxfilesperproc to 8192"
     sudo sysctl -w kern.maxfilesperproc=8192
+  fi
 fi
 
 export SALT_CONFIG_DIR=${HOME}/salt/etc/salt
