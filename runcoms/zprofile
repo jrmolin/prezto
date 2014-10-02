@@ -84,3 +84,6 @@ if [[ "${NUMFILES}" < 8192 ]] ; then
 fi
 
 export SALT_CONFIG_DIR=${HOME}/salt/etc/salt
+if [[ -e "$HOME/.aliases" ]]; then
+  source "$HOME/.aliases"
+fi
